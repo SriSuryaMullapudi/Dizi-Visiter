@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:id="@+id/json"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Click here For Details"
+                    android:gravity="center"
+                    android:onClick="getJSON"
+                    android:layout_gravity="center"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:text="Visitor Table"
+                android:gravity="center"/>
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/table_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/table_row1"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Name"/>
+                    <TextView
+                        android:id="@+id/gender"
+                        android:textColor="#000"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="gender"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/phonenumber"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Phonenumber"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/purpose"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Purpose"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/date"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Date"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/time"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Time Of Meeting"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/visitortype"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Visitor Type"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/identitytype"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Id Type"/>
+                    <TextView
+                        android:textColor="#000"
+                        android:id="@+id/identityrefernce"
+                        android:fontFamily="serif"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Id Number"/>
+
+                </TableRow>
+                <View
+                    android:layout_height="3dip"
+                    android:layout_width="match_parent"
+                    android:background="#ff0000"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:gravity="left"
+                    android:id="@+id/textview" />
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

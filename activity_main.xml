@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/images"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/logo2"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/space"/>
+
+    <Button
+        android:id="@+id/butplannedvisitor"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rounded_button"
+        android:text="Plan A Visitor"
+        android:textColor="#ffffff"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/images"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/butviewplannedvisitor"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/rounded_button"
+        android:text="All Planned Visitor List"
+        android:textColor="#ffffff"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butplannedvisitor" />
+
+
+    <Button
+        android:id="@+id/butindetails"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="In Visitors"
+        android:textColor="#ffffff"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butviewplannedvisitor"
+        android:background="@drawable/rounded_button"/>
+
+    <Button
+        android:id="@+id/butvendor"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/rounded_button"
+        android:text="Vendor"
+        android:textColor="#ffffff"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butindetails" />
+    <Switch
+        android:id="@+id/butswitch1"
+        android:layout_width="250dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="28dp"
+        android:text="House Status"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:textOff="Out"
+        android:textOn="In"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butvendor" />
+
+</android.support.constraint.ConstraintLayout>
