@@ -1,72 +1,131 @@
-package com.example.dizivisitor;
+package com.SriSurya.FriendsChat;
 
-
-
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    String us_name,us_password;
 
-    ViewFlipper v_flipper;
+    private FirebaseAuth mAuth;
+    private ProgressDialog loadingBar;
+
+    private FirebaseUser currentUser;
+
+    private Button LoginButton, PhoneLoginButton;
+    private EditText UserEMail, UserPassword;
+    private TextView NeedNewAccountLink, ForgetPasswordLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_alt);
 
-        int images[] = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
-        v_flipper = findViewById(R.id.viewflipper);
+        initializeFields();
 
-        for (int image:images ){
-            flipperImages(image);
-        }
-
-        final EditText upass =(EditText)findViewById(R.id.upass);
-        final EditText username =(EditText)findViewById(R.id.uname);
-        Button login=(Button)findViewById(R.id.login);
-        TextView regbutt=(TextView)findViewById(R.id.butregister);
-        regbutt.setOnClickListener(new View.OnClickListener() {
+        NeedNewAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent =new
-                        Intent(getApplicationContext(),RegisterActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                SendUserToRegisterActivity();
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
+
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                sessiondata obj = new sessiondata();
-                obj.context = LoginActivity.this;
-                us_name=username.getText().toString();
-                us_password=upass.getText().toString();
-                obj.username = us_name;
-                String method="login";
-                BackgroundTask backgroundTask=new BackgroundTask(getApplicationContext());
-                backgroundTask.execute(method,us_name,us_password);
-
+            public void onClick(View v) {
+                AllowUserToLogin();
             }
+        });
 
+        PhoneLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent phoneLoginIntent = new Intent(LoginActivity.this, PhoneLoginActivity.class);
+                startActivity(phoneLoginIntent);
+            }
         });
     }
 
-    public void flipperImages(int images){
-        ImageView imageview = new ImageView(this);
-        imageview.setBackgroundResource(images);
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-        v_flipper.addView(imageview);
-        v_flipper.setFlipInterval(4000);
-        v_flipper.setAutoStart(true);
-        v_flipper.setInAnimation(this,android.R.anim.slide_in_left);
-        v_flipper.setOutAnimation(this,android.R.anim.slide_out_right);
+        if (currentUser != null) {
+            SendUserToMainActivity();
+        }
+    }
+
+    private void AllowUserToLogin() {
+        String email = UserEMail.getText().toString();
+        String password = UserPassword.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Please enter email...", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter password...", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            loadingBar.setTitle("Sign In");
+            loadingBar.setMessage("Please wait...");
+            loadingBar.setCanceledOnTouchOutside(true);
+            loadingBar.show();
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                SendUserToMainActivity();
+                                Toast.makeText(LoginActivity.this, "Logged in Successful...", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            } else {
+                                String message = task.getException().toString();
+                                Toast.makeText(LoginActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
+
+                        }
+                    });
+        }
+    }
+
+    private void initializeFields() {
+        LoginButton = findViewById(R.id.login_button);
+        PhoneLoginButton = findViewById(R.id.phone_login_button);
+        UserEMail = findViewById(R.id.login_email);
+        UserPassword = findViewById(R.id.login_password);
+        NeedNewAccountLink = findViewById(R.id.need_new_account_link);
+        ForgetPasswordLink = findViewById(R.id.forget_password_link);
+        loadingBar = new ProgressDialog(this);
+    }
+
+    private void SendUserToMainActivity() {
+        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
+    }
+
+    private void SendUserToRegisterActivity() {
+        Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(registerIntent);
     }
 }
