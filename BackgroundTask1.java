@@ -23,7 +23,7 @@ public class BackgroundTask1 extends AsyncTask<String,Void,String> {
     BackgroundTask1(Context ctx){
         this.ctx=ctx;
     }
-    @Override
+   // @Override
     protected String doInBackground(String... params) {
 
         String
